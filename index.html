@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Docifyo — Solar Proposal Generator</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --or:#E8703A;--orl:#FEF0E8;--ord:#C05828;--orb:#F5C4A0;
+  --or:#E8703A;--orl:#FEF0E8;--ord:#C05828;
   --bg:#F4F2EE;--card:#fff;--bd:#DDDBD6;--bd2:#C5C2BB;
   --tx:#1A1916;--tx2:#6B6860;--tx3:#A8A49E;
   --gr:#1E6E3E;--grl:#D6EFE1;--bl:#1F5C99;--bll:#DDEAF8;
@@ -16,15 +16,17 @@
   --sh:0 1px 3px rgba(0,0,0,.07),0 4px 14px rgba(0,0,0,.05);
 }
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
-*{font-family:'DM Sans',system-ui,sans-serif}
-input,select,textarea{font-size:13.5px;width:100%;padding:10px 13px;background:#fff;color:var(--tx);border:1.5px solid var(--bd2);border-radius:8px;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none;}
+*{font-family:inherit}
+input,select,textarea{font-size:13.5px;width:100%;padding:10px 13px;background:#fff;color:var(--tx);border:1.5px solid var(--bd2);border-radius:8px;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
 input:focus,select:focus,textarea:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(232,112,58,.13)}
 input::placeholder,textarea::placeholder{color:var(--tx3)}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%236B6860' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;cursor:pointer}
 textarea{resize:vertical;line-height:1.65}
 label{display:block;font-size:12px;font-weight:500;color:var(--tx2);margin-bottom:6px}
-.f{margin-bottom:16px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-button{cursor:pointer;border:none;outline:none;transition:all .15s}
+.f{margin-bottom:16px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 14px}
+button{cursor:pointer;border:none;outline:none;transition:all .15s;font-family:inherit}
 .btn{padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:500}
 .btn-p{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(232,112,58,.22)}
 .btn-p:hover{background:var(--ord)}.btn-p:active{transform:scale(.98)}
@@ -32,14 +34,17 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
 .btn-g{background:transparent;border:1.5px solid var(--bd2);color:var(--tx2)}
 .btn-g:hover{background:#F0EEE9}
 .btn-sm{padding:6px 14px;font-size:12px;border-radius:7px}
-.btn-del{background:var(--rdl);color:var(--rd);border:1px solid #F09595}
+.btn-teal{background:#0F766E;color:#fff}.btn-teal:hover{background:#0D6B64}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--sh)}
-.page{max-width:900px;margin:0 auto;padding:24px 20px}
-.pg-md{max-width:640px;margin:0 auto;padding:24px 20px}
+.page{max-width:960px;margin:0 auto;padding:24px 20px}
+.pg-md{max-width:660px;margin:0 auto;padding:24px 20px}
 .screen{display:none}.screen.on{display:block}
+
+/* topbar */
 .tb{background:var(--or);height:54px;display:flex;align-items:center;padding:0 22px;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(232,112,58,.25)}
-.tb-logo{font-size:17px;font-weight:600;color:#fff}
-.tb-sep{color:rgba(255,255,255,.3)}.tb-co{color:rgba(255,255,255,.65);font-size:13px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-logo{font-size:17px;font-weight:600;color:#fff;display:flex;align-items:center;gap:7px}
+.tb-sep{color:rgba(255,255,255,.3)}
+.tb-co{color:rgba(255,255,255,.65);font-size:13px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tb-r{margin-left:auto;display:flex;align-items:center;gap:8px}
 .tb-un{color:rgba(255,255,255,.75);font-size:13px}
 .tb-sb{padding:5px 14px;border-radius:7px;font-size:12px;font-weight:500;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer}
@@ -48,27 +53,54 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
 .tb-out:hover{color:rgba(255,255,255,.9)}
 .tb-bk{background:none;border:none;color:rgba(255,255,255,.65);font-size:22px;line-height:1;padding:2px 4px;cursor:pointer}
 .tb-bk:hover{color:#fff}
+
+/* login */
 .lw{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
 .lc{width:100%;max-width:390px;padding:36px 32px}
 .li-ico{width:52px;height:52px;background:var(--or);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px;box-shadow:0 4px 14px rgba(232,112,58,.28)}
 .li-t{font-size:23px;font-weight:600;text-align:center;letter-spacing:-.02em}
 .li-s{font-size:13px;color:var(--tx3);text-align:center;margin:4px 0 28px}
 .pw-w{position:relative}.pw-w input{padding-right:44px}
-.pw-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--tx3);padding:4px;font-size:15px;line-height:1}
+.pw-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--tx3);padding:4px;font-size:15px}
 .err{padding:9px 12px;border-radius:8px;background:var(--rdl);color:var(--rd);font-size:12.5px;margin-bottom:12px;border:1px solid #F09595}
-.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.st{padding:18px 20px;border-radius:14px;background:var(--card);border:1px solid var(--bd)}
-.sl{font-size:11px;color:var(--tx3);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
-.sv{font-size:28px;font-weight:600;line-height:1}
-.dh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
-.dt{font-size:20px;font-weight:600;letter-spacing:-.02em}.ds{font-size:13px;color:var(--tx3);margin-top:3px}
+
+/* dashboard tabs */
+.dash-tabs{display:flex;gap:0;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:4px;margin-bottom:20px;width:fit-content;box-shadow:var(--sh)}
+.dash-tab{padding:8px 22px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .15s;background:none;border:none}
+.dash-tab.on{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(232,112,58,.22)}
+.dash-tab:hover:not(.on){background:#F0EEE9;color:var(--tx)}
+
+/* stat cards */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.st{padding:16px 18px;border-radius:12px;background:var(--card);border:1px solid var(--bd)}
+.sl{font-size:10.5px;color:var(--tx3);font-weight:600;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
+.sv{font-size:26px;font-weight:600;line-height:1}
+
+/* tables */
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10.5px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;padding:9px 12px;text-align:left;border-bottom:1.5px solid var(--bd)}
-.tbl td{padding:11px 12px;border-bottom:1px solid var(--bd);font-size:13px;vertical-align:middle}
+.tbl th{font-size:10.5px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;padding:10px 14px;text-align:left;border-bottom:1.5px solid var(--bd)}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--bd);font-size:13px;vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}.tbl tr:hover td{background:#FAFAF8}
-.id-p{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--or);font-weight:500;background:var(--orl);padding:3px 8px;border-radius:6px}
+.id-p{font-family:'DM Mono',monospace;font-size:11px;color:var(--or);background:var(--orl);padding:3px 8px;border-radius:6px;font-weight:500}
+.id-g{font-family:'DM Mono',monospace;font-size:11px;color:var(--gr);background:var(--grl);padding:3px 8px;border-radius:6px;font-weight:500}
 .sp{font-size:11px;padding:3px 9px;border-radius:6px;font-weight:600;display:inline-block}
 .sp-g{background:var(--grl);color:var(--gr)}.sp-o{background:var(--orl);color:var(--ord)}
+.sp-b{background:var(--bll);color:var(--bl)}
+
+/* project card (mobile-friendly) */
+.prj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.prj-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:10px;transition:border-color .15s}
+.prj-card:hover{border-color:var(--bd2)}
+.prj-top{display:flex;justify-content:space-between;align-items:flex-start}
+.prj-name{font-size:14px;font-weight:600;line-height:1.3}
+.prj-meta{font-size:12px;color:var(--tx3);margin-top:3px}
+.prj-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.prj-stat{background:#F8F7F5;border-radius:8px;padding:8px 10px}
+.prj-sl{font-size:10px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.prj-sv{font-size:13px;font-weight:600}
+.prj-actions{display:flex;gap:8px;margin-top:4px}
+
+/* form stepper */
 .stp{display:flex;align-items:center;margin-bottom:16px}
 .sc{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;transition:all .2s}
 .sc.dn{background:var(--grl);color:var(--gr)}.sc.ac{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(232,112,58,.3)}.sc.id{background:#ECEAE5;color:var(--tx3)}
@@ -77,42 +109,52 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
 .sln{flex:1;height:1.5px;background:var(--bd);margin:0 8px}.sln.dn{background:var(--gr)}
 .pb{height:3px;background:#ECEAE5;border-radius:2px;margin-bottom:20px;overflow:hidden}
 .pbf{height:3px;background:var(--or);border-radius:2px;transition:width .35s}
-.dv{height:1px;background:var(--bd);margin:18px 0}
-.sh{font-size:16px;font-weight:600;letter-spacing:-.01em}.ss{font-size:13px;color:var(--tx2);margin-top:3px;margin-bottom:18px}
+.dv{height:1px;background:var(--bd);margin:16px 0}
+.sh{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.ss{font-size:13px;color:var(--tx2);margin-top:3px;margin-bottom:18px}
 .fnav{display:flex;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--bd)}
+
+/* review grid */
 .rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .rc{padding:12px 14px;border-radius:10px;background:#F8F7F5;border:1px solid var(--bd)}
-.rl{font-size:11px;color:var(--tx3);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}.rv{font-size:15px;font-weight:600}
+.rl{font-size:11px;color:var(--tx3);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.rv{font-size:15px;font-weight:600}
 .sstx{padding:14px 16px;border-radius:10px;background:var(--orl);border-left:3px solid var(--or)}
 .sstx-t{font-size:12px;font-weight:600;color:var(--ord);margin-bottom:10px}
+
+/* template picker */
 .tg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tc{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .15s;background:var(--card)}
+.tc{border:1.5px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .15s;background:var(--card)}
 .tc:hover{border-color:var(--bd2)}.tc.sel{border-color:var(--or);box-shadow:0 0 0 3px rgba(232,112,58,.12)}
-.tp{height:80px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;position:relative;background:#F8F7F5}
-.ti{padding:12px 14px}.tn{font-size:13.5px;font-weight:600;display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}.td{font-size:12px;color:var(--tx3)}
+.tp{height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;position:relative}
+.ti{padding:12px 14px}.tn{font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.td{font-size:12px;color:var(--tx3)}
 .tck{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;position:absolute;top:10px;right:12px}
+
+/* settings tabs */
 .stt{display:flex;gap:2px;background:#ECEAE5;padding:4px;border-radius:10px;margin-bottom:20px;flex-wrap:wrap}
-.stb{flex:1;min-width:80px;padding:8px 10px;border-radius:7px;border:none;background:transparent;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .15s;text-align:center}
+.stb{flex:1;min-width:70px;padding:8px 10px;border-radius:7px;border:none;background:transparent;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .15s;text-align:center}
 .stb.on{background:#fff;color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .ib{padding:12px 14px;border-radius:10px;background:#F8F7F5;border:1px solid var(--bd);font-size:12.5px;color:var(--tx2);line-height:1.7;margin-top:4px}
-.ur{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:#F8F7F5;border:1px solid var(--bd);margin-bottom:8px}
-.ua{width:34px;height:34px;border-radius:50%;background:var(--orl);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--ord);flex-shrink:0}
-.ui{flex:1;min-width:0}.un{font-size:13px;font-weight:500}.ue{font-size:11.5px;color:var(--tx3);font-family:'DM Mono',monospace;overflow:hidden;text-overflow:ellipsis}
-.rb{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
-.ra{background:var(--orl);color:var(--ord)}.ru{background:var(--bll);color:var(--bl)}
-.pvb{display:flex;align-items:center;gap:14px;padding:16px;border-radius:12px;margin-bottom:20px}
-.pvic{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
+
+/* spinner + toast */
 @keyframes spin{to{transform:rotate(360deg)}}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:7px}
+.spinner-d{display:inline-block;width:15px;height:15px;border:2px solid var(--orb);border-top-color:var(--or);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:7px}
 .toast{position:fixed;top:68px;right:20px;background:#1A1916;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none;max-width:320px;line-height:1.5}
 .toast.on{opacity:1;transform:translateY(0)}
 .emp{text-align:center;padding:56px 20px}
-.emp-i{font-size:40px;opacity:.1;margin-bottom:14px}.emp-t{color:var(--tx3);font-size:14px;margin-bottom:20px}
-@media(max-width:600px){.r2{grid-template-columns:1fr}.sg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:1fr}.sll{display:none}}
+.emp-i{font-size:38px;opacity:.12;margin-bottom:12px}
+.emp-t{color:var(--tx3);font-size:14px;margin-bottom:20px}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.dt{font-size:20px;font-weight:600;letter-spacing:-.02em}
+
+@media(max-width:640px){.r2,.r3{grid-template-columns:1fr}.sg{grid-template-columns:1fr 1fr}.prj-grid{grid-template-columns:1fr}.tg{grid-template-columns:1fr}.sll{display:none}}
 </style>
 </head>
 <body>
 
+<!-- ════ LOGIN ════ -->
 <div id="s-login" class="screen on">
 <div class="lw"><div class="card lc">
   <div class="li-ico">☀</div>
@@ -121,13 +163,13 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
   <div class="f"><label>Email address</label><input type="email" id="li-em" placeholder="you@company.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
   <div class="f"><label>Password</label>
     <div class="pw-w"><input type="password" id="li-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="pw-eye" onclick="togglePw()">👁</button></div>
-  </div>
+    <button class="pw-eye" onclick="togglePw()">👁</button></div></div>
   <div id="li-err" class="err" style="display:none"></div>
   <button class="btn btn-p" id="li-btn" style="width:100%;padding:12px" onclick="doLogin()">Sign In →</button>
 </div></div>
 </div>
 
+<!-- ════ DASHBOARD ════ -->
 <div id="s-dash" class="screen">
   <div class="tb">
     <div class="tb-logo">☀ Docifyo</div>
@@ -139,31 +181,51 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
     </div>
   </div>
   <div class="page">
-    <div class="dh">
-      <div><div class="dt">Proposals</div><div class="ds" id="dash-s"></div></div>
-      <button class="btn btn-p" onclick="newProp()">+ New Proposal</button>
-    </div>
     <div class="sg">
-      <div class="st"><div class="sl">Total</div><div class="sv" id="s-tot">0</div></div>
+      <div class="st"><div class="sl">Projects</div><div class="sv" id="s-prj">0</div></div>
+      <div class="st"><div class="sl">Proposals</div><div class="sv" id="s-prop">0</div></div>
       <div class="st"><div class="sl">Total value</div><div class="sv" id="s-val">—</div></div>
-      <div class="st"><div class="sl">Generated</div><div class="sv" id="s-gen">0</div></div>
+      <div class="st"><div class="sl">kWp installed</div><div class="sv" id="s-kw">—</div></div>
     </div>
-    <div class="card" id="prop-card">
-      <div class="emp" id="emp"><div class="emp-i">📄</div><div class="emp-t">No proposals yet</div>
-        <button class="btn btn-p" onclick="newProp()">Create first proposal</button></div>
-      <div id="prop-tbl" style="display:none">
-        <table class="tbl"><thead><tr>
-          <th>ID</th><th>Customer</th><th>Size</th><th>Total Cost</th><th>Payback</th><th>Date</th><th>Status</th><th></th>
-        </tr></thead><tbody id="prop-body"></tbody></table>
+    <div class="dash-tabs">
+      <button class="dash-tab on" id="tab-prj" onclick="switchTab('projects')">📁 Projects</button>
+      <button class="dash-tab" id="tab-prop" onclick="switchTab('proposals')">📄 Proposals</button>
+    </div>
+
+    <!-- Projects panel -->
+    <div id="panel-projects">
+      <div class="dh">
+        <div><div class="dt">Projects</div><div style="font-size:13px;color:var(--tx3);margin-top:2px" id="prj-sub"></div></div>
+        <button class="btn btn-p" onclick="newProject()">+ New Project</button>
+      </div>
+      <div id="prj-body">
+        <div class="emp"><div class="emp-i">📁</div><div class="emp-t">No projects yet</div>
+          <button class="btn btn-p" onclick="newProject()">Create first project</button></div>
+      </div>
+    </div>
+
+    <!-- Proposals panel -->
+    <div id="panel-proposals" style="display:none">
+      <div class="dh">
+        <div><div class="dt">Proposals</div><div style="font-size:13px;color:var(--tx3);margin-top:2px" id="prop-sub"></div></div>
+      </div>
+      <div class="card" id="prop-card">
+        <div class="emp" id="prop-emp"><div class="emp-i">📄</div><div class="emp-t">No proposals yet — generate one from a project</div></div>
+        <div id="prop-tbl" style="display:none">
+          <table class="tbl"><thead><tr>
+            <th>Proposal ID</th><th>Customer</th><th>Size</th><th>Total Cost</th><th>Payback</th><th>Date</th><th>Status</th><th></th>
+          </tr></thead><tbody id="prop-body-t"></tbody></table>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="s-form" class="screen">
+<!-- ════ NEW PROJECT FORM ════ -->
+<div id="s-prjform" class="screen">
   <div class="tb">
     <button class="tb-bk" onclick="formBack()">←</button>
-    <div class="tb-logo" style="font-size:15px">New Proposal</div>
+    <div class="tb-logo" style="font-size:15px" id="prjform-title">New Project</div>
     <div class="tb-r"><span class="tb-co" id="f-co"></span></div>
   </div>
   <div class="pg-md">
@@ -181,44 +243,51 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
   </div>
 </div>
 
+<!-- ════ PROJECT DETAIL ════ -->
+<div id="s-prjdetail" class="screen">
+  <div class="tb">
+    <button class="tb-bk" onclick="show('s-dash')">←</button>
+    <div class="tb-logo" style="font-size:15px" id="detail-title">Project</div>
+    <div class="tb-r">
+      <button class="btn btn-p btn-sm" onclick="gotoGenerate()">⬇ Generate Proposal</button>
+    </div>
+  </div>
+  <div class="page" style="max-width:760px">
+    <div id="detail-body"></div>
+  </div>
+</div>
+
+<!-- ════ TEMPLATE PICKER ════ -->
 <div id="s-tpl" class="screen">
   <div class="tb">
-    <button class="tb-bk" onclick="show('s-form')">←</button>
-    <div class="tb-logo" style="font-size:15px">Choose Template</div>
+    <button class="tb-bk" onclick="show('s-prjdetail')">←</button>
+    <div class="tb-logo" style="font-size:15px">Generate Proposal</div>
+    <div class="tb-r"><span style="color:rgba(255,255,255,.65);font-size:13px" id="tpl-for"></span></div>
   </div>
   <div class="pg-md">
     <div class="card" style="padding:24px">
-      <div class="sh">Proposal template</div>
-      <div class="ss">Choose a layout for this proposal</div>
-      <div id="tpl-g"><div style="text-align:center;padding:20px;color:var(--tx3)">Loading templates…</div></div>
-      <div class="fnav">
-        <button class="btn btn-g" onclick="show('s-form')">← Back</button>
-        <button class="btn btn-p" onclick="gotoPreview()">Preview →</button>
-      </div>
-    </div>
-  </div>
-</div>
+      <div class="sh">Choose template</div>
+      <div class="ss">Select the proposal layout for this customer</div>
+      <div id="tpl-g" style="margin-bottom:20px"><div style="text-align:center;padding:20px;color:var(--tx3)"><span class="spinner-d"></span>Loading templates…</div></div>
 
-<div id="s-prev" class="screen">
-  <div class="tb">
-    <button class="tb-bk" onclick="show('s-tpl')">←</button>
-    <div class="tb-logo" style="font-size:15px">Final Preview</div>
-  </div>
-  <div class="pg-md">
-    <div class="card" style="padding:24px">
-      <div class="pvb" id="pv-ban"></div>
-      <div class="rg" id="pv-grid"></div>
-      <div id="pv-ld" style="display:none;text-align:center;padding:12px;color:var(--tx3);font-size:13px">
-        <span class="spinner" style="border-color:rgba(0,0,0,.15);border-top-color:var(--or)"></span>Generating proposal — takes 15–30 seconds…
+      <!-- Preview summary -->
+      <div style="background:#F8F7F5;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid var(--bd)">
+        <div style="font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">Proposal summary</div>
+        <div class="rg" id="tpl-summary"></div>
+      </div>
+
+      <div id="gen-ld" style="display:none;text-align:center;padding:8px;color:var(--tx3);font-size:13px;margin-bottom:12px">
+        <span class="spinner-d"></span>Generating PDF — takes 15–30 seconds…
       </div>
       <div style="display:flex;gap:10px">
-        <button class="btn btn-g" onclick="show('s-tpl')">← Change</button>
-        <button class="btn btn-p" id="pv-btn" onclick="generate()" style="flex:1;padding:12px">⬇ Generate Proposal</button>
+        <button class="btn btn-g" onclick="show('s-prjdetail')">← Cancel</button>
+        <button class="btn btn-p" id="gen-btn" onclick="generateProposal()" style="flex:1;padding:12px">⬇ Generate Proposal</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ════ SETTINGS ════ -->
 <div id="s-sett" class="screen">
   <div class="tb">
     <button class="tb-bk" onclick="show('s-dash')">←</button>
@@ -239,95 +308,313 @@ button{cursor:pointer;border:none;outline:none;transition:all .15s}
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// API — calls /api/proxy (same origin, no CORS)
-// ══════════════════════════════════════════════════════
-async function api(params) {
-  const url = '/api/proxy?' + new URLSearchParams(params).toString();
-  const r   = await fetch(url);
-  return await r.json();
-}
-async function apiPost(data) {
-  const r = await fetch('/api/proxy', {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify(data)
+// ════════════════════════════════════════════════════════
+// google.script.run wrapper — Promise-based
+// ════════════════════════════════════════════════════════
+function gsr(fn, ...args) {
+  return new Promise((res, rej) => {
+    google.script.run.withSuccessHandler(res).withFailureHandler(rej)[fn](...args);
   });
-  return await r.json();
 }
 
-// ── STATE ──
-let CU=null,CO=null,ST={},props=[],fd={},step=1,selTpl=null,compTpls=null,lsett={},settTab=0;
+// ── STATE ────────────────────────────────────────────────
+let CU=null, CO=null, ST={}, projects=[], proposals=[], compTpls=null;
+let fd={}, step=1, selTpl=null, curProject=null, lsett={}, settTab=0;
 
 const COS=[
-  {id:'CO-001',name:'RTech Solar World',address:'E-258, Azad Nagar, Bhilwara, Rajasthan 311001',phone:'98481 39848',email:'abc@rtech.com',gst:'08AAICG1190Q1Z2',poc:'Mr. Mohammed',website:'www.rtechsolar.com'},
-  {id:'CO-002',name:'SunPower India Pvt Ltd',address:'123 MG Road, Bangalore 560001',phone:'9876543210',email:'info@sunpower.in',gst:'29ABCDE1234F1Z5',poc:'Ms. Priya Sharma',website:'www.sunpowerindia.com'},
-  {id:'CO-003',name:'GreenWatt Solutions',address:'45 Solar Avenue, Pune 411001',phone:'9988776655',email:'hello@greenwatt.in',gst:'27GRWTS5678R1ZA',poc:'Mr. Amit Patel',website:'www.greenwatt.in'},
+  {id:'CO-001',name:'RTech Solar World',address:'E-258 Azad Nagar, Bhilwara, Rajasthan 311001',phone:'98481 39848',email:'abc@rtech.com',gst:'08AAICG1190Q1Z2',poc:'Mr. Mohammed'},
+  {id:'CO-002',name:'SunPower India Pvt Ltd',address:'123 MG Road, Bangalore 560001',phone:'9876543210',email:'info@sunpower.in',gst:'29ABCDE1234F1Z5',poc:'Ms. Priya Sharma'},
+  {id:'CO-003',name:'GreenWatt Solutions',address:'45 Solar Avenue, Pune 411001',phone:'9988776655',email:'hello@greenwatt.in',gst:'27GRWTS5678R1ZA',poc:'Mr. Amit Patel'},
 ];
 const FALLBACK_TPLS=[
-  {id:'TPL-001',name:'Standard Proposal',desc:'Full proposal with 30-yr projection',color:'#1F5C99',light:'#DDEAF8'},
-  {id:'TPL-002',name:'Executive Summary',desc:'Compact ROI overview',color:'#1E6E3E',light:'#D6EFE1'},
-  {id:'TPL-003',name:'Commercial Format',desc:'Commercial heavy-data layout',color:'#7C4F0A',light:'#FDF0DC'},
+  {id:'TPL-001',name:'Standard Proposal',desc:'Full 3-page with 30-yr projection',color:'#1F5C99',light:'#DDEAF8'},
+  {id:'TPL-002',name:'Executive Summary',desc:'Compact 1-page ROI overview',color:'#1E6E3E',light:'#D6EFE1'},
 ];
-const STEPS=['Customer','Project & BOM','Pricing','Review'];
+const STEPS=['Customer','Equipment','Pricing','Review'];
 const fm=n=>Number(n||0).toLocaleString('en-IN');
 const today=()=>new Date().toLocaleDateString('en-IN');
+
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
-function toast(msg,d=3000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),d);}
+function toast(msg,d=3500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),d);}
 function el(id){return document.getElementById(id);}
 function togglePw(){const i=el('li-pw');i.type=i.type==='password'?'text':'password';}
+
 function calc(f){
   const kW=+f.projectSize||0,sp=+f.systemPrice||0,ac=+f.additionalCharges||0,nm=+f.netMeterCharges||0,r=+f.electricityRate||0,g=+(ST.perKwGen||4.25);
   const daily=kW*g,yr=Math.round(daily*365),gst=Math.round(sp*.138),total=Math.round(sp+gst+ac+nm),sv=Math.round(yr*r),pb=sv>0?(total/sv).toFixed(1):0;
   const d1=Math.round(total*.4),d2=Math.round((total-d1)*.4),d3=Math.round((total-d1-d2)*.4);
   return{daily:daily.toFixed(1),yearly:yr,gst,totalCost:total,saving1:sv,payback:pb,trees:Math.round(yr*.01013),co2:(yr*.000543).toFixed(2),dep1:d1,dep2:d2,dep3:d3,tax:Math.round((d1+d2+d3)*.3)};
 }
-function defs(){return{panelBrand:'',wattPeak:'550',panelQty:'',panelType:'Mono Perc Half Cut',panelWarranty:'12 Yrs / 30 Yrs',inverterBrand:'',inverterSize:'',inverterPhase:'Three Phase',inverterType:'String Inverter',inverterQty:'1',inverterWarranty:'7 Years',cableBrand:'Polycab',batteryBrand:'',bosDetails:'Junction Box, DC Cable, AC Cable, Earthing Kit',perKwGen:'4.25',electricityRate:'',additionalCharges:'1500',netMeterCharges:'10000',scope:'1. Engineering Drawing & Design\n2. Supply of Modules, Inverters & BOP\n3. Complete Installation & Commissioning\n4. Net Meter Coordination with DISCOM\n5. Zero Export Device Installation\n6. System Monitoring Setup',paymentTerms:'20% Advance | 70% Before Delivery | 5% On Installation | 5% On Net Meter',tAndC:'• Prices valid 30 days from offer date\n• Delivery: 3-4 weeks from order\n• Civil & digging at customer scope\n• Manufacturer warranty applies',bankDetails:''};}
 
+function defs(){return{panelBrand:'',wattPeak:'550',panelQty:'',panelType:'Mono Perc Half Cut',panelWarranty:'12 Yrs / 30 Yrs',inverterBrand:'',inverterSize:'',inverterPhase:'Three Phase',inverterType:'String Inverter',inverterQty:'1',inverterWarranty:'7 Years',cableBrand:'Polycab',batteryBrand:'',structureType:'Aluminium',bosDetails:'Junction Box, DC Cable, AC Cable, Earthing Kit',discom:'',perKwGen:'4.25',electricityRate:'',additionalCharges:'1500',netMeterCharges:'10000'};}
+
+// ── AUTH ─────────────────────────────────────────────────
 async function doLogin(){
-  const em=el('li-em').value.trim(),pw=el('li-pw').value;
-  if(!em||!pw)return;
-  const btn=el('li-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Signing in…';
+  const em=el('li-em').value.trim(), pw=el('li-pw').value;
+  if(!em||!pw) return;
+  const btn=el('li-btn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Signing in…';
   el('li-err').style.display='none';
   try{
-    const d=await api({action:'login',email:em,password:pw});
-    if(d.success){CU=d;CO=COS.find(c=>c.id===d.companyId)||COS[0];ST=defs();compTpls=null;selTpl=null;props=[];gotoDash();}
-    else{el('li-err').textContent=d.error||'Invalid email or password.';el('li-err').style.display='block';}
-  }catch(e){el('li-err').textContent='Connection error: '+e.message;el('li-err').style.display='block';}
-  btn.disabled=false;btn.textContent='Sign In →';
+    const d=await gsr('serverLogin',em,pw);
+    if(d.success){ CU=d; CO=COS.find(c=>c.id===d.companyId)||COS[0]; ST=defs(); compTpls=null; await gotoDash(); }
+    else{ el('li-err').textContent=d.error||'Invalid email or password.'; el('li-err').style.display='block'; }
+  }catch(e){ el('li-err').textContent='Connection error. Try again.'; el('li-err').style.display='block'; }
+  btn.disabled=false; btn.textContent='Sign In →';
 }
-function logout(){CU=null;CO=null;show('s-login');}
+function logout(){ CU=null; CO=null; show('s-login'); }
 
+// ── DASHBOARD ────────────────────────────────────────────
 async function gotoDash(){
-  el('tb-co').textContent=CO.name;el('tb-un').textContent=CU.name;el('dash-s').textContent=CO.name;
-  try{
-    const[sd,pd]=await Promise.all([api({action:'getSettings',companyId:CO.id}),api({action:'getProposals',companyId:CO.id})]);
-    if(sd.success)ST={...defs(),...sd};
-    if(pd.success)props=pd.proposals;
-  }catch(e){}
-  const mp=props||[];const tot=mp.reduce((s,p)=>s+(+p.totalCost||0),0);
-  el('s-tot').textContent=mp.length;
-  el('s-val').textContent=mp.length?'₹'+(tot/100000).toFixed(1)+'L':'—';
-  el('s-gen').textContent=mp.filter(p=>p.status==='Generated').length;
-  if(!mp.length){el('emp').style.display='block';el('prop-tbl').style.display='none';}
-  else{
-    el('emp').style.display='none';el('prop-tbl').style.display='block';
-    el('prop-body').innerHTML=mp.map(p=>`<tr>
-      <td><span class="id-p">${p.id}</span></td>
-      <td><strong>${p.customerName||'—'}</strong></td>
-      <td style="color:var(--tx3)">${p.projectSize||0} kW</td>
-      <td>₹${fm(p.totalCost)}</td>
-      <td style="color:var(--tx3)">${p.payback||'—'} yrs</td>
-      <td style="color:var(--tx3);font-size:12px">${p.date||''}</td>
-      <td><span class="sp ${p.status==='Generated'?'sp-g':'sp-o'}">${p.status}</span></td>
-      <td>${p.pdfUrl?`<a href="${p.pdfUrl}" target="_blank" style="color:var(--or);font-size:12px;font-weight:500;text-decoration:none">↓ Open</a>`:''}</td>
-    </tr>`).join('');
-  }
+  el('tb-co').textContent=CO.name; el('tb-un').textContent=CU.name;
   show('s-dash');
+
+  // Load in parallel
+  try{
+    const[sd,pd,prd]=await Promise.all([
+      gsr('serverGetSettings',CO.id),
+      gsr('serverGetProposals',CO.id),
+      gsr('serverGetProjects',CO.id)
+    ]);
+    if(sd.success) ST={...defs(),...sd};
+    if(pd.success) proposals=pd.proposals;
+    if(prd.success) projects=prd.projects;
+  }catch(e){ console.warn(e); }
+
+  updateStats(); renderProjects(); renderProposals();
 }
 
-function newProp(){
-  fd={refNo:'',date:today(),customerName:'',address:'',phone:'',email:'',
+function updateStats(){
+  el('s-prj').textContent  = projects.length;
+  el('s-prop').textContent = proposals.length;
+  const tot = proposals.reduce((s,p)=>s+(+p.totalCost||0),0);
+  el('s-val').textContent  = proposals.length ? '₹'+(tot/100000).toFixed(1)+'L' : '—';
+  const kw  = projects.reduce((s,p)=>s+(+p.projectSize||0),0);
+  el('s-kw').textContent   = projects.length ? kw.toFixed(1)+' kW' : '—';
+  el('prj-sub').textContent = CO.name;
+  el('prop-sub').textContent = proposals.length + ' generated';
+}
+
+function switchTab(t){
+  el('tab-prj').classList.toggle('on',t==='projects');
+  el('tab-prop').classList.toggle('on',t==='proposals');
+  el('panel-projects').style.display = t==='projects'?'block':'none';
+  el('panel-proposals').style.display = t==='proposals'?'block':'none';
+}
+
+// ── PROJECTS LIST ─────────────────────────────────────────
+function renderProjects(){
+  const body=el('prj-body');
+  if(!projects.length){
+    body.innerHTML=`<div class="emp"><div class="emp-i">📁</div><div class="emp-t">No projects yet</div><button class="btn btn-p" onclick="newProject()">Create first project</button></div>`;
+    return;
+  }
+  body.innerHTML=`<div class="prj-grid">${projects.map(p=>{
+    const C=calc(p);
+    const propCount=proposals.filter(pr=>pr.projectId===p.id).length;
+    return`<div class="prj-card">
+      <div class="prj-top">
+        <div>
+          <div class="prj-name">${p.customerName}</div>
+          <div class="prj-meta">${p.refNo} · ${p.date}</div>
+        </div>
+        <span class="sp sp-b">${p.projectSize} kWp</span>
+      </div>
+      <div class="prj-stats">
+        <div class="prj-stat"><div class="prj-sl">Total Cost</div><div class="prj-sv">₹${fm(C.totalCost)}</div></div>
+        <div class="prj-stat"><div class="prj-sl">Payback</div><div class="prj-sv">${C.payback} yrs</div></div>
+        <div class="prj-stat"><div class="prj-sl">Annual Saving</div><div class="prj-sv">₹${fm(C.saving1)}</div></div>
+        <div class="prj-stat"><div class="prj-sl">Proposals</div><div class="prj-sv">${propCount}</div></div>
+      </div>
+      <div class="prj-actions">
+        <button class="btn btn-g btn-sm" style="flex:1" onclick="viewProject('${p.id}')">View Details</button>
+        <button class="btn btn-p btn-sm" style="flex:1" onclick="quickGenerate('${p.id}')">⬇ Proposal</button>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+// ── PROPOSALS LIST ────────────────────────────────────────
+function renderProposals(){
+  if(!proposals.length){
+    el('prop-emp').style.display='block'; el('prop-tbl').style.display='none'; return;
+  }
+  el('prop-emp').style.display='none'; el('prop-tbl').style.display='block';
+  el('prop-body-t').innerHTML=proposals.map(p=>`<tr>
+    <td><span class="id-p">${p.id}</span></td>
+    <td><strong>${p.customerName||'—'}</strong></td>
+    <td style="color:var(--tx3)">${p.projectSize||0} kW</td>
+    <td>₹${fm(p.totalCost)}</td>
+    <td style="color:var(--tx3)">${p.payback||'—'} yrs</td>
+    <td style="color:var(--tx3);font-size:12px">${p.date||''}</td>
+    <td><span class="sp sp-g">${p.status}</span></td>
+    <td>${p.pdfUrl?`<a href="${p.pdfUrl}" target="_blank" style="color:var(--or);font-size:12px;font-weight:600;text-decoration:none">↓ Open PDF</a>`:''}</td>
+  </tr>`).join('');
+}
+
+// ── PROJECT DETAIL ────────────────────────────────────────
+function viewProject(id){
+  curProject = projects.find(p=>p.id===id);
+  if(!curProject) return;
+  const C=calc(curProject);
+  el('detail-title').textContent = curProject.customerName;
+
+  const propList = proposals.filter(pr=>pr.projectId===id);
+
+  el('detail-body').innerHTML=`
+    <!-- Customer -->
+    <div class="card" style="padding:20px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px">Customer Information</div>
+      <div class="r3">
+        <div><div class="prj-sl">Customer Name</div><div style="font-weight:600;font-size:14px;margin-top:3px">${curProject.customerName}</div></div>
+        <div><div class="prj-sl">Phone</div><div style="font-size:13px;margin-top:3px">${curProject.phone||'—'}</div></div>
+        <div><div class="prj-sl">Email</div><div style="font-size:13px;margin-top:3px">${curProject.email||'—'}</div></div>
+      </div>
+      <div style="margin-top:12px"><div class="prj-sl">Address</div><div style="font-size:13px;margin-top:3px;color:var(--tx2)">${curProject.address||'—'}</div></div>
+    </div>
+
+    <!-- System -->
+    <div class="card" style="padding:20px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px">System Details</div>
+      <div class="r3" style="gap:12px">
+        ${[['Project Size',curProject.projectSize+' kWp'],['Panel Brand',curProject.panelBrand||'—'],['Watt Peak',curProject.wattPeak+' Wp'],
+           ['Panel Type',curProject.panelType||'—'],['Panel Qty',curProject.panels+' nos'],['Panel Warranty',curProject.panelWarranty||'—'],
+           ['Inverter Brand',curProject.inverterBrand||'—'],['Inverter Size',curProject.inverterSize+' kW'],['Inverter Phase',curProject.inverterPhase||'—'],
+           ['Structure',curProject.structureType||'—'],['Cable Brand',curProject.cableBrand||'—'],['DISCOM',curProject.discom||'—']
+          ].map(([l,v])=>`<div style="margin-bottom:10px"><div class="prj-sl">${l}</div><div style="font-size:13px;font-weight:500;margin-top:2px">${v}</div></div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Financials -->
+    <div class="card" style="padding:20px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px">Financial Summary</div>
+      <div class="rg">
+        ${[['System Price','₹ '+fm(curProject.systemPrice)],['GST (13.8%)','₹ '+fm(C.gst)],
+           ['Additional Charges','₹ '+fm(curProject.additionalCharges)],['Net Meter Charges','₹ '+fm(curProject.netMeterCharges)],
+           ['Total Project Cost','₹ '+fm(C.totalCost)],['Electricity Rate','₹ '+curProject.electricityRate+'/unit'],
+           ['Annual Saving (Yr1)','₹ '+fm(C.saving1)],['Payback Period',C.payback+' Years'],
+           ['Daily Generation',C.daily+' kWh'],['Yearly Generation',fm(C.yearly)+' kWh'],
+           ['Trees Saved/yr',fm(C.trees)],['CO₂ Saved/yr',C.co2+' T']
+          ].map(([l,v])=>`<div class="rc"><div class="rl">${l}</div><div class="rv">${v}</div></div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Proposals from this project -->
+    <div class="card" style="padding:20px;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em">Proposals Generated (${propList.length})</div>
+        <button class="btn btn-p btn-sm" onclick="gotoGenerate()">+ Generate New</button>
+      </div>
+      ${propList.length?`<table class="tbl"><thead><tr><th>ID</th><th>Date</th><th>Template</th><th>Status</th><th></th></tr></thead><tbody>
+        ${propList.map(p=>`<tr>
+          <td><span class="id-g">${p.id}</span></td>
+          <td style="color:var(--tx3);font-size:12px">${p.date}</td>
+          <td style="color:var(--tx3)">${p.template}</td>
+          <td><span class="sp sp-g">${p.status}</span></td>
+          <td>${p.pdfUrl?`<a href="${p.pdfUrl}" target="_blank" style="color:var(--or);font-size:12px;font-weight:600;text-decoration:none">↓ Open PDF</a>`:''}</td>
+        </tr>`).join('')}
+      </tbody></table>`:
+      `<div style="text-align:center;padding:20px;color:var(--tx3);font-size:13px">No proposals yet for this project</div>`}
+    </div>`;
+
+  show('s-prjdetail');
+}
+
+function quickGenerate(id){
+  curProject=projects.find(p=>p.id===id);
+  if(curProject) gotoGenerate();
+}
+
+// ── GENERATE PROPOSAL (template picker) ──────────────────
+async function gotoGenerate(){
+  if(!curProject) return;
+  el('tpl-for').textContent=curProject.customerName;
+
+  // Build summary from project
+  const C=calc(curProject);
+  el('tpl-summary').innerHTML=[
+    ['Customer',curProject.customerName],['Project',curProject.projectSize+' kWp'],
+    ['System Price','₹ '+fm(curProject.systemPrice)],['Total Cost','₹ '+fm(C.totalCost)],
+    ['Annual Saving','₹ '+fm(C.saving1)],['Payback',C.payback+' Yrs'],
+  ].map(([l,v])=>`<div class="rc"><div class="rl">${l}</div><div class="rv">${v}</div></div>`).join('');
+
+  show('s-tpl');
+
+  // Load templates
+  if(!compTpls){
+    el('tpl-g').innerHTML='<div style="text-align:center;padding:20px;color:var(--tx3)"><span class="spinner-d"></span> Loading templates…</div>';
+    try{
+      const d=await gsr('serverGetTemplates',CO.id);
+      if(d.success&&d.templates&&d.templates.length) compTpls=d.templates;
+    }catch(e){}
+    if(!compTpls||!compTpls.length) compTpls=FALLBACK_TPLS;
+    if(!selTpl) selTpl=compTpls[0].id;
+  }
+  renderTpls();
+}
+
+function renderTpls(){
+  const colors=['#1F5C99','#1E6E3E','#7C4F0A','#4A3D8F','#A32D2D'];
+  const lights=['#DDEAF8','#D6EFE1','#FDF0DC','#ECEAFC','#FCEBEB'];
+  el('tpl-g').innerHTML=compTpls.map((t,i)=>{
+    const c=t.color||colors[i%5],l=t.light||lights[i%5];
+    return`<div class="tc${selTpl===t.id?' sel':''}" onclick="selTpl='${t.id}';renderTpls()">
+      <div class="tp" style="background:${l}">
+        <div style="display:flex;flex-direction:column;gap:5px;width:60%">
+          <div style="height:5px;background:${c};opacity:.7;border-radius:2px"></div>
+          <div style="height:3px;background:${c};opacity:.4;border-radius:2px"></div>
+          <div style="height:3px;background:${c};opacity:.25;border-radius:2px"></div>
+        </div>
+        ${selTpl===t.id?`<div class="tck" style="background:${c}">✓</div>`:''}
+      </div>
+      <div class="ti">
+        <div class="tn">${t.name}<span style="font-size:10px;padding:2px 6px;border-radius:5px;background:${l};color:${c};font-weight:600">PDF</span></div>
+        <div class="td">${t.desc||'Proposal template'}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function generateProposal(){
+  if(!curProject||!selTpl) return;
+  const btn=el('gen-btn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Generating…';
+  el('gen-ld').style.display='block';
+
+  try{
+    const payload={
+      ...curProject,
+      action:'saveProposal',
+      companyId:CO.id,
+      userName:CU.name,
+      templateId:selTpl,
+      projectId:curProject.id
+    };
+    const d=await gsr('serverSaveProposal',payload);
+    if(d.success){
+      toast('✓ Proposal saved to Drive!');
+      if(d.pdfUrl) window.open(d.pdfUrl,'_blank');
+      // Refresh proposals
+      try{
+        const pd=await gsr('serverGetProposals',CO.id);
+        if(pd.success) proposals=pd.proposals;
+      }catch(e){}
+      updateStats(); renderProposals();
+      show('s-prjdetail');
+      viewProject(curProject.id);
+    }else{
+      toast('Error: '+(d.error||'Something went wrong'),6000);
+      console.error(d);
+    }
+  }catch(e){
+    toast('Error: '+e.message,6000); console.error(e);
+  }
+  btn.disabled=false; btn.innerHTML='⬇ Generate Proposal';
+  el('gen-ld').style.display='none';
+}
+
+// ── NEW PROJECT FORM ──────────────────────────────────────
+function newProject(){
+  fd={refNo:'',date:today(),customerName:'',address:'',phone:'',email:'',notes:'',
     projectSize:'',wattPeak:ST.wattPeak||'550',panels:ST.panelQty||'',
     panelType:ST.panelType||'Mono Perc Half Cut',panelBrand:ST.panelBrand||'',
     panelWarranty:ST.panelWarranty||'12 Yrs / 30 Yrs',
@@ -338,115 +625,176 @@ function newProp(){
     discom:'',batteryBrand:ST.batteryBrand||'',bosDetails:ST.bosDetails||'',
     systemPrice:'',additionalCharges:ST.additionalCharges||'1500',
     netMeterCharges:ST.netMeterCharges||'10000',electricityRate:ST.electricityRate||''};
-  step=1;rForm();show('s-form');el('f-co').textContent=CO.name;
+  step=1; rForm(); show('s-prjform');
+  el('prjform-title').textContent='New Project';
+  el('f-co').textContent=CO.name;
 }
-function formBack(){step>1?(step--,rForm()):show('s-dash');}
-function formNext(){if(step<4){step++;rForm();}else{loadAndShowTpls();}}
-function fi(id,lb,ph='',tp='text'){const v=String(fd[id]||'').replace(/"/g,'&quot;');return`<div class="f"><label>${lb}</label><input type="${tp}" value="${v}" placeholder="${ph}" oninput="fd['${id}']=this.value${step===4?';rForm()':''}" onchange="fd['${id}']=this.value${step===4?';rForm()':''}"></div>`;}
-function fs(id,lb,opts){const os=opts.map(o=>`<option${(fd[id]||opts[0])===o?' selected':''}>${o}</option>`).join('');return`<div class="f"><label>${lb}</label><select onchange="fd['${id}']=this.value">${os}</select></div>`;}
+
+function formBack(){
+  if(step>1){step--;rForm();}
+  else show('s-dash');
+}
+
+async function formNext(){
+  if(step<4){step++;rForm();}
+  else{await saveProject();}
+}
+
+function fi(id,lb,ph='',tp='text'){
+  const v=String(fd[id]||'').replace(/"/g,'&quot;');
+  return`<div class="f"><label>${lb}</label><input type="${tp}" value="${v}" placeholder="${ph}" oninput="fd['${id}']=this.value${step===4?';rForm()':''}" onchange="fd['${id}']=this.value${step===4?';rForm()':''}"></div>`;
+}
+function fs(id,lb,opts){
+  const os=opts.map(o=>`<option${(fd[id]||opts[0])===o?' selected':''}>${o}</option>`).join('');
+  return`<div class="f"><label>${lb}</label><select onchange="fd['${id}']=this.value">${os}</select></div>`;
+}
 function r2(a,b){return`<div class="r2">${a}${b}</div>`;}
 function dv(){return`<div class="dv"></div>`;}
+
 function rForm(){
-  el('stpr').innerHTML=STEPS.map((s,i)=>{const st=i<step-1?'dn':i===step-1?'ac':'id';return`<div class="sc ${st}">${st==='dn'?'✓':i+1}</div><span class="sll ${st}">${s}</span>${i<STEPS.length-1?`<div class="sln ${i<step-1?'dn':''}"></div>`:''}`}).join('');
-  el('pbf').style.width=(step/4*100)+'%';
-  const ok=fd.projectSize&&fd.systemPrice&&fd.electricityRate;
-  el('f-nx').textContent=step===4?'Choose Template →':'Continue →';
-  el('f-nx').disabled=(step===4&&!ok);
-  el('f-bk').textContent=step===1?'← Dashboard':'← Back';
-  const c=el('f-cnt');
-  if(step===1)c.innerHTML=`<div class="sh">Customer information</div><div class="ss">Enter the customer's details</div>${r2(fi('refNo','Reference No.','SSD-01'),fi('date','Date'))}${fi('customerName','Customer Name *','Mr. Rahul Sir')}${fi('address','Address','Full address with city, state, PIN')}${r2(fi('phone','Phone','9876543210'),fi('email','Email','abc@email.com'))}`;
-  else if(step===2)c.innerHTML=`<div class="sh">Project & bill of material</div><div class="ss">Pre-filled from your company settings</div>${r2(fi('projectSize','Project Size (kW) *','7.86'),fi('wattPeak','Watt Peak (Wp)','550'))}${r2(fi('panels','No. of Panels','18'),fs('panelType','Panel Type',['Mono Perc Half Cut','Mono Perc','Mono Perc Bifacial','Mono Topcon','Mono Bifacial']))}${r2(fi('panelBrand','Panel Brand','Adani / Waaree / Tata'),fi('panelWarranty','Panel Warranty'))}${dv()}${r2(fi('inverterSize','Inverter Size (kW)','15'),fi('inverterBrand','Inverter Brand','Growatt / SunGrow'))}${r2(fs('inverterPhase','Inverter Phase',['Single Phase','Three Phase']),fs('inverterType','Inverter Type',['String Inverter','Micro Inverter','Hybrid Inverter']))}${r2(fi('inverterQty','Inverter Qty','1'),fi('inverterWarranty','Inverter Warranty'))}${dv()}${r2(fs('structureType','Structure Type',['Aluminium','Standard','Elevated','Mono Rail','RCC','High Raise','Low Raise']),fi('cableBrand','Cable Brand','Polycab / Havells'))}${r2(fi('batteryBrand','Battery Brand','Luminous / Livguard'),fi('discom','DISCOM Name','Adani / MSEDCL'))}${fi('bosDetails','BOS Details','Junction Box, DC Cable…')}`;
-  else if(step===3)c.innerHTML=`<div class="sh">Pricing & energy data</div><div class="ss">Pre-filled from your settings</div>${r2(fi('systemPrice','System Price (₹) *','352850'),fi('electricityRate','Electricity Rate (₹/unit) *','11'))}${r2(fi('additionalCharges','Additional Charges (₹)'),fi('netMeterCharges','Net Meter Charges (₹)'))}<div class="ib">GST (13.8%) is calculated automatically. All figures update live on the Review step.</div>`;
-  else{
-    if(!ok){c.innerHTML=`<div style="text-align:center;padding:32px;color:var(--tx3)">Go back and fill project size, system price and electricity rate.</div>`;return;}
-    const C=calc(fd);
-    c.innerHTML=`<div class="sh">Review & calculations</div><div class="ss">Confirm before generating</div>
-    <div class="rg">${[['Daily generation',C.daily+' kWh'],['Yearly generation',fm(C.yearly)+' kWh'],['GST (13.8%)','₹ '+fm(C.gst)],['Total project cost','₹ '+fm(C.totalCost)],['Annual saving (Yr 1)','₹ '+fm(C.saving1)],['Payback period',C.payback+' Years'],['Trees saved / year',fm(C.trees)],['CO₂ / year',C.co2+' T']].map(([l,v])=>`<div class="rc"><div class="rl">${l}</div><div class="rv">${v}</div></div>`).join('')}</div>
-    <div class="sstx"><div class="sstx-t">Savings — first 5 years</div>
-    <table style="width:100%;font-size:12.5px;border-collapse:collapse"><tr>${['Year','Tariff','Generation','Annual saving'].map(h=>`<td style="font-weight:600;color:var(--ord);padding-bottom:8px">${h}</td>`).join('')}</tr>
-    ${(()=>{let r='',t=+fd.electricityRate,g=+fd.projectSize*(+(ST.perKwGen||4.25))*365;for(let i=1;i<=5;i++){r+=`<tr><td style="color:var(--tx3)">${i}</td><td style="color:var(--tx3)">₹${t.toFixed(2)}</td><td style="color:var(--tx3)">${fm(Math.round(g))} kWh</td><td style="font-weight:600;color:var(--ord)">₹ ${fm(Math.round(g*t))}</td></tr>`;t*=1.015;g*=0.995;}return r;})()}
-    </table></div>`;
-  }
-}
-
-async function loadAndShowTpls(){
-  show('s-tpl');
-  el('tpl-g').innerHTML='<div style="text-align:center;padding:24px;color:var(--tx3)">Loading templates…</div>';
-  if(!compTpls){
-    try{
-      const d=await api({action:'getTemplates',companyId:CO.id});
-      if(d.success&&d.templates&&d.templates.length>0){compTpls=d.templates;if(!selTpl)selTpl=compTpls[0].id;}
-    }catch(e){}
-  }
-  if(!compTpls||!compTpls.length)compTpls=FALLBACK_TPLS;
-  if(!selTpl)selTpl=compTpls[0].id;
-  renderTpls();
-}
-function renderTpls(){
-  const colors=['#1F5C99','#1E6E3E','#7C4F0A','#4A3D8F','#A32D2D'];
-  const lights=['#DDEAF8','#D6EFE1','#FDF0DC','#ECEAFC','#FCEBEB'];
-  el('tpl-g').innerHTML=compTpls.map((t,i)=>{
-    const color=t.color||colors[i%colors.length],light=t.light||lights[i%lights.length];
-    return`<div class="tc${selTpl===t.id?' sel':''}" onclick="selTpl='${t.id}';renderTpls()">
-      <div class="tp" style="background:${light}">
-        <div style="display:flex;flex-direction:column;gap:5px;width:60%">
-          <div style="height:5px;background:${color};opacity:.7;border-radius:2px"></div>
-          <div style="height:3px;background:${color};opacity:.4;border-radius:2px"></div>
-          <div style="height:3px;background:${color};opacity:.25;border-radius:2px"></div>
-        </div>
-        ${selTpl===t.id?`<div class="tck" style="background:${color}">✓</div>`:''}
-      </div>
-      <div class="ti">
-        <div class="tn">${t.name}<span style="font-size:11px;padding:2px 7px;border-radius:6px;background:${light};color:${color};font-weight:600">PDF</span></div>
-        <div class="td">${t.desc||'Proposal template'}</div>
-      </div>
-    </div>`;
+  el('stpr').innerHTML=STEPS.map((s,i)=>{
+    const st=i<step-1?'dn':i===step-1?'ac':'id';
+    return`<div class="sc ${st}">${st==='dn'?'✓':i+1}</div><span class="sll ${st}">${s}</span>${i<STEPS.length-1?`<div class="sln ${i<step-1?'dn':''}"></div>`:''}`;
   }).join('');
+  el('pbf').style.width=(step/4*100)+'%';
+
+  const ready=fd.projectSize&&fd.systemPrice&&fd.electricityRate;
+  el('f-nx').textContent=step===4?'Save Project →':'Continue →';
+  el('f-nx').disabled=(step===4&&!ready);
+  el('f-bk').textContent=step===1?'← Dashboard':'← Back';
+
+  const c=el('f-cnt');
+  if(step===1) c.innerHTML=`
+    <div class="sh">Customer information</div>
+    <div class="ss">Enter the customer details for this project</div>
+    ${r2(fi('refNo','Reference No.','PRJ-001'),fi('date','Date'))}
+    ${fi('customerName','Customer Name *','Mr. Rahul Sharma')}
+    ${fi('address','Address','Full address with city, state, PIN')}
+    ${r2(fi('phone','Phone *','9876543210'),fi('email','Email','email@example.com'))}
+    ${fi('notes','Notes (optional)','Any extra notes about this project')}`;
+
+  else if(step===2) c.innerHTML=`
+    <div class="sh">System & equipment</div>
+    <div class="ss">Pre-filled from your settings — override as needed</div>
+    ${r2(fi('projectSize','Project Size (kW) *','7.86'),fi('wattPeak','Watt Peak (Wp)','550'))}
+    ${r2(fi('panels','No. of Panels','18'),fs('panelType','Panel Type',['Mono Perc Half Cut','Mono Perc','Mono Perc Bifacial','Mono Topcon','Mono Bifacial']))}
+    ${r2(fi('panelBrand','Panel Brand','Adani / Waaree / Tata'),fi('panelWarranty','Panel Warranty'))}
+    ${dv()}
+    ${r2(fi('inverterSize','Inverter Size (kW)','15'),fi('inverterBrand','Inverter Brand','Growatt / SunGrow'))}
+    ${r2(fs('inverterPhase','Inverter Phase',['Single Phase','Three Phase']),fs('inverterType','Inverter Type',['String Inverter','Micro Inverter','Hybrid Inverter']))}
+    ${r2(fi('inverterQty','Inverter Qty','1'),fi('inverterWarranty','Inverter Warranty'))}
+    ${dv()}
+    ${r2(fs('structureType','Structure',['Aluminium','Standard','Elevated','Mono Rail','RCC','High Raise','Low Raise']),fi('cableBrand','Cable Brand','Polycab / Havells'))}
+    ${r2(fi('batteryBrand','Battery Brand (if any)','Luminous / Livguard'),fi('discom','DISCOM Name','Adani / MSEDCL'))}
+    ${fi('bosDetails','BOS Details','Junction Box, DC Cable, AC Cable, Earthing Kit')}`;
+
+  else if(step===3) c.innerHTML=`
+    <div class="sh">Pricing & energy</div>
+    <div class="ss">Pre-filled from your settings — override per project</div>
+    ${r2(fi('systemPrice','System Price (₹) *','352850'),fi('electricityRate','Electricity Rate (₹/unit) *','11'))}
+    ${r2(fi('additionalCharges','Additional Charges (₹)'),fi('netMeterCharges','Net Meter Charges (₹)'))}
+    <div class="ib">GST (13.8%) is added automatically. All savings and payback figures are calculated on the Review step.</div>`;
+
+  else{
+    if(!ready){c.innerHTML=`<div style="text-align:center;padding:32px;color:var(--tx3)">Please go back and fill Project Size, System Price and Electricity Rate.</div>`;return;}
+    const C=calc(fd);
+    c.innerHTML=`
+    <div class="sh">Review & confirm</div>
+    <div class="ss">Check everything before saving this project</div>
+    <div style="background:#F0F7FF;border-radius:10px;padding:12px 14px;margin-bottom:16px;border-left:3px solid var(--bl)">
+      <div style="font-weight:600;font-size:13px">${fd.customerName||'—'}</div>
+      <div style="font-size:12px;color:var(--tx2);margin-top:2px">${fd.address||''} · ${fd.phone||''}</div>
+    </div>
+    <div class="rg">
+      ${[['Project Size',fd.projectSize+' kWp'],['Daily Generation',C.daily+' kWh'],
+         ['Yearly Generation',fm(C.yearly)+' kWh'],['GST (13.8%)','₹ '+fm(C.gst)],
+         ['Total Project Cost','₹ '+fm(C.totalCost)],['Electricity Rate','₹ '+fd.electricityRate+'/unit'],
+         ['Annual Saving (Yr1)','₹ '+fm(C.saving1)],['Payback Period',C.payback+' Years'],
+         ['Trees Saved/yr',fm(C.trees)],['CO₂ Saved/yr',C.co2+' T']
+        ].map(([l,v])=>`<div class="rc"><div class="rl">${l}</div><div class="rv">${v}</div></div>`).join('')}
+    </div>
+    <div class="sstx"><div class="sstx-t">Savings — first 5 years</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse">
+        <tr>${['Year','Tariff','Generation','Annual Saving'].map(h=>`<td style="font-weight:600;color:var(--ord);padding-bottom:6px">${h}</td>`).join('')}</tr>
+        ${(()=>{let r='',t=+fd.electricityRate,g=+fd.projectSize*(+(ST.perKwGen||4.25))*365;
+          for(let i=1;i<=5;i++){r+=`<tr><td style="color:var(--tx3)">${i}</td><td style="color:var(--tx3)">₹${t.toFixed(2)}</td><td style="color:var(--tx3)">${fm(Math.round(g))} kWh</td><td style="font-weight:600;color:var(--ord)">₹ ${fm(Math.round(g*t))}</td></tr>`;t*=1.015;g*=0.995;}return r;})()}
+      </table>
+    </div>`;
+  }
 }
 
-function gotoPreview(){
-  const t=compTpls.find(x=>x.id===selTpl)||compTpls[0];
-  const C=calc(fd);const color=t.color||'#1F5C99';
-  el('pv-ban').innerHTML=`<div class="pvic" style="background:${color}">PDF</div><div><div style="font-weight:600;font-size:14px;color:${color}">${t.name}</div><div style="font-size:12px;color:var(--tx3);margin-top:3px;font-family:'DM Mono',monospace">Proposal_${(fd.customerName||'Customer').replace(/\s+/g,'_')}_${fd.refNo||'001'}.pdf</div></div>`;
-  el('pv-grid').innerHTML=[['Customer',fd.customerName||'—'],['Project',`${fd.projectSize||0} kWp`],['System price','₹ '+fm(fd.systemPrice)],['GST','₹ '+fm(C.gst)],['Total cost','₹ '+fm(C.totalCost)],['Payback',C.payback+' Yrs'],['Annual saving','₹ '+fm(C.saving1)],['Trees/year',fm(C.trees)]].map(([l,v])=>`<div class="rc"><div class="rl">${l}</div><div class="rv">${v}</div></div>`).join('');
-  show('s-prev');
-}
-
-async function generate(){
-  const btn=el('pv-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Generating…';
-  el('pv-ld').style.display='block';
+async function saveProject(){
+  const btn=el('f-nx');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving…';
   try{
-    const data=await apiPost({action:'saveProposal',...fd,companyId:CO.id,userName:CU.name,templateId:selTpl});
-    if(data.success){
-      toast('✓ Proposal saved to Drive!');
-      if(data.pdfUrl)window.open(data.pdfUrl,'_blank');
-      gotoDash();
-    }else{toast('Error: '+(data.error||'Something went wrong'),6000);console.error(data);}
-  }catch(e){toast('Error: '+e.message,6000);console.error(e);}
-  btn.disabled=false;btn.innerHTML='⬇ Generate Proposal';
-  el('pv-ld').style.display='none';
+    const d=await gsr('serverSaveProject',{...fd,companyId:CO.id});
+    if(d.success){
+      toast('✓ Project saved! Now generate a proposal from it.');
+      // Refresh projects
+      const pd=await gsr('serverGetProjects',CO.id);
+      if(pd.success) projects=pd.projects;
+      updateStats(); renderProjects();
+      // Go to the new project detail
+      const newProj=projects.find(p=>p.id===d.projectId)||projects[0];
+      if(newProj){ curProject=newProj; viewProject(newProj.id); }
+      else show('s-dash');
+    }else{
+      toast('Error: '+(d.error||'Could not save project'),6000);
+    }
+  }catch(e){
+    toast('Error: '+e.message,6000); console.error(e);
+  }
+  btn.disabled=false; btn.textContent='Save Project →';
 }
 
-const TABS_A=['Equipment','Financial','Terms & Docs','Users','Account'];
-const TABS_U=['Equipment','Financial','Terms & Docs','Account'];
-async function gotoSett(){lsett={...ST};settTab=0;el('sett-co').textContent=CO.name;rSettTabs();rSettCnt();show('s-sett');}
+// ── SETTINGS ─────────────────────────────────────────────
+const TABS_A=['Equipment','Financial','Terms & Docs','Account'];
+const TABS_U=['Equipment','Financial','Account'];
+
+async function gotoSett(){
+  lsett={...ST}; settTab=0; el('sett-co').textContent=CO.name;
+  rSettTabs(); rSettCnt(); show('s-sett');
+}
 function rSettTabs(){
   const tabs=CU.role==='admin'?TABS_A:TABS_U;
   el('sett-tabs').innerHTML=tabs.map((t,i)=>`<button class="stb${settTab===i?' on':''}" onclick="settTab=${i};rSettTabs();rSettCnt()">${t}</button>`).join('');
   el('sett-savrow').style.display=tabs[settTab]==='Account'?'none':'flex';
 }
 function rSettCnt(){
-  const tabs=CU.role==='admin'?TABS_A:TABS_U;const tab=tabs[settTab];const c=el('sett-cnt');
+  const tabs=CU.role==='admin'?TABS_A:TABS_U;
+  const tab=tabs[settTab]; const c=el('sett-cnt');
   const si=(id,lb,ph='')=>`<div class="f"><label>${lb}</label><input type="text" value="${lsett[id]||''}" placeholder="${ph}" oninput="lsett['${id}']=this.value"></div>`;
-  const ss=(id,lb,opts)=>{const os=opts.map(o=>`<option${(lsett[id]||'')=== o?' selected':''}>${o}</option>`).join('');return`<div class="f"><label>${lb}</label><select onchange="lsett['${id}']=this.value">${os}</select></div>`;};
+  const ss2=(id,lb,opts)=>{const os=opts.map(o=>`<option${(lsett[id]||'')===o?' selected':''}>${o}</option>`).join('');return`<div class="f"><label>${lb}</label><select onchange="lsett['${id}']=this.value">${os}</select></div>`;};
   const sta=(id,lb,rows,ph='')=>`<div class="f"><label>${lb}</label><textarea rows="${rows}" placeholder="${ph}" oninput="lsett['${id}']=this.value">${lsett[id]||''}</textarea></div>`;
-  if(tab==='Equipment')c.innerHTML=`<div class="sh">Equipment defaults</div><div class="ss">Pre-fills every new proposal</div><div class="r2">${si('panelBrand','Panel brand','Adani / Waaree')}${si('wattPeak','Watt peak (Wp)','550')}</div><div class="r2">${si('panelQty','Default panel qty','18')}${ss('panelType','Panel type',['Mono Perc Half Cut','Mono Perc','Mono Perc Bifacial','Mono Topcon','Mono Bifacial'])}</div><div class="r2">${si('panelWarranty','Panel warranty','12 Yrs / 30 Yrs')}${si('inverterBrand','Inverter brand','Growatt / SunGrow')}</div><div class="r2">${si('inverterSize','Inverter size (kW)','15')}${ss('inverterPhase','Inverter phase',['Single Phase','Three Phase'])}</div><div class="r2">${ss('inverterType','Inverter type',['String Inverter','Micro Inverter','Hybrid Inverter'])}${si('inverterWarranty','Inverter warranty','7 Years')}</div><div class="r2">${si('cableBrand','Cable brand','Polycab')}${si('batteryBrand','Battery brand','Luminous')}</div><div class="r2">${si('perKwGen','Generation per kW (kWh/day)','4.25')}${si('bosDetails','BOS details','Junction Box…')}</div>`;
-  else if(tab==='Financial')c.innerHTML=`<div class="sh">Financial defaults</div><div class="ss">Default rates for new proposals</div><div class="r2">${si('electricityRate','Electricity rate (₹/unit)','11')}${si('perKwGen','Generation per kW (kWh/day)','4.25')}</div><div class="r2">${si('additionalCharges','Additional charges (₹)','1500')}${si('netMeterCharges','Net meter charges (₹)','10000')}</div><div class="ib"><strong style="color:var(--tx)">Fixed:</strong> GST 13.8% · Tariff escalation 1.5%/yr · Panel degradation 0.5%/yr · Depreciation WDV 40%</div>`;
-  else if(tab==='Terms & Docs')c.innerHTML=`<div class="sh">Terms & documents</div><div class="ss">Appear in every proposal automatically</div>${sta('scope','Scope of work',5)}${sta('paymentTerms','Payment terms',2)}${sta('tAndC','Terms & conditions',4)}${sta('bankDetails','Bank & payment details',3)}`;
-  else if(tab==='Users')c.innerHTML=`<div class="sh">Team members</div><div class="ss">Manage access for ${CO.name}</div><div class="ib">To add or remove users, update the MASTER_USERS tab in the Docifyo Master Sheet. Changes take effect on next login.</div>`;
-  else if(tab==='Account')c.innerHTML=`<div class="sh">My account</div><div style="padding:14px 16px;border-radius:10px;background:#F8F7F5;border:1px solid var(--bd);margin:16px 0"><div style="font-size:14px;font-weight:600">${CU.name}</div><div style="font-size:12.5px;color:var(--tx3);margin-top:2px">${CU.email}</div><span class="rb ${CU.role==='admin'?'ra':'ru'}" style="margin-top:8px;display:inline-block">${CU.role}</span></div>`;
+
+  if(tab==='Equipment') c.innerHTML=`<div class="sh">Equipment defaults</div><div class="ss">Pre-fills every new project — override per project anytime</div>
+    <div class="r2">${si('panelBrand','Panel brand','Adani / Waaree')}${si('wattPeak','Watt peak (Wp)','550')}</div>
+    <div class="r2">${si('panelQty','Default panel qty','18')}${ss2('panelType','Panel type',['Mono Perc Half Cut','Mono Perc','Mono Perc Bifacial','Mono Topcon','Mono Bifacial'])}</div>
+    <div class="r2">${si('panelWarranty','Panel warranty','12 Yrs / 30 Yrs')}${si('inverterBrand','Inverter brand','Growatt / SunGrow')}</div>
+    <div class="r2">${si('inverterSize','Inverter size (kW)','15')}${ss2('inverterPhase','Inverter phase',['Single Phase','Three Phase'])}</div>
+    <div class="r2">${ss2('inverterType','Inverter type',['String Inverter','Micro Inverter','Hybrid Inverter'])}${si('inverterWarranty','Inverter warranty','7 Years')}</div>
+    <div class="r2">${si('cableBrand','Cable brand','Polycab')}${si('batteryBrand','Battery brand','Luminous')}</div>
+    <div class="r2">${si('perKwGen','Generation per kW (kWh/day)','4.25')}${si('bosDetails','BOS details','Junction Box…')}</div>`;
+
+  else if(tab==='Financial') c.innerHTML=`<div class="sh">Financial defaults</div><div class="ss">Default rates used in every new project</div>
+    <div class="r2">${si('electricityRate','Electricity rate (₹/unit)','11')}${si('perKwGen','Generation per kW (kWh/day)','4.25')}</div>
+    <div class="r2">${si('additionalCharges','Additional charges (₹)','1500')}${si('netMeterCharges','Net meter charges (₹)','10000')}</div>
+    <div class="ib"><strong style="color:var(--tx)">Fixed:</strong> GST 13.8% · Tariff escalation 1.5%/yr · Panel degradation 0.5%/yr · Depreciation WDV 40%</div>`;
+
+  else if(tab==='Terms & Docs') c.innerHTML=`<div class="sh">Terms & documents</div><div class="ss">These appear in every proposal automatically</div>
+    ${sta('scope','Scope of work',5,'1. Engineering Drawing & Design\n2. Supply of Modules…')}
+    ${sta('paymentTerms','Payment terms',2,'20% Advance | 70% Before Delivery…')}
+    ${sta('tAndC','Terms & conditions',4,'• Prices valid 30 days…')}
+    ${sta('bankDetails','Bank & payment details',3,'Bank Name | Branch | Account No | IFSC')}`;
+
+  else if(tab==='Account') c.innerHTML=`<div class="sh">My account</div>
+    <div style="padding:14px 16px;border-radius:10px;background:#F8F7F5;border:1px solid var(--bd);margin:16px 0">
+      <div style="font-size:14px;font-weight:600">${CU.name}</div>
+      <div style="font-size:12.5px;color:var(--tx3);margin-top:2px">${CU.email}</div>
+      <span style="font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600;background:var(--orl);color:var(--ord);margin-top:8px;display:inline-block">${CU.role}</span>
+    </div>`;
 }
-function saveSett(){ST={...lsett};toast('✓ Settings saved');}
+function saveSett(){ ST={...lsett}; toast('✓ Settings saved for this session'); }
 </script>
 </body>
 </html>
